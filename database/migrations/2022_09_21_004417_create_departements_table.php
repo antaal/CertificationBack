@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('departements', function (Blueprint $table) {
             $table->id();
+            $table->string('nom_Departement');
+            $table->unsignedBigInteger('regions_id');
+            $table->foreign('regions_id')->references('id')->on('regions');
             $table->timestamps();
         });
     }

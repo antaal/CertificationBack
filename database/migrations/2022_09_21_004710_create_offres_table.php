@@ -14,7 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('offres', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('titre');
+            $table->string('image');
+            $table->string('description');
+            $table->dateTime('date_Lancement');
+            $table->dateTime('fin_Depot');
+             // $table->unsignedBigInteger('secteurs_id')->nullable();
+            // $table->foreign('secteurs_id')->references('id')->on('secteurs');
             $table->timestamps();
         });
     }

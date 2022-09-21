@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('communes', function (Blueprint $table) {
             $table->id();
+            $table->string('nom_Commune');
+            $table->unsignedBigInteger('departements_id');
+            $table->foreign('departements_id')->references('id')->on('departements');
             $table->timestamps();
         });
     }
