@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Departement extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['nom_Departement'];
+
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
+    }
+    
+    public function communes()
+    {
+        return $this->hasMany(Commune::class);
+    }
 }

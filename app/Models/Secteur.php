@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Secteur extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['nom_Secteur'];
+
+    public function offres()
+    {
+        return $this->hasMany(Offre::class);
+    }
 }

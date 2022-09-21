@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Commune extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['nom_Commune'];
+
+    public function departement()
+    {
+        return $this->belongsTo(Departement::class);
+    }
+
+    public function quartiers()
+    {
+        return $this->hasMany(Quartier::class);
+    }
 }
