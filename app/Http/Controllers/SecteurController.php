@@ -14,7 +14,7 @@ class SecteurController extends Controller
      */
     public function index()
     {
-        //
+        return Secteur::all();
     }
 
     /**
@@ -35,20 +35,20 @@ class SecteurController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $secteur = Secteur::create($request->all());
+        return response()->json($secteur, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Secteur  $secteur
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Secteur $secteur)
+    public function show($id)
     {
-        //
+        return Secteur::findorfail($id);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -64,22 +64,25 @@ class SecteurController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Secteur  $secteur
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Secteur $secteur)
+    public function update(Request $request, $id)
     {
-        //
+        $secteur = Secteur::findorfail($id);
+        $secteur->update($request->all());
+        return response()->json($secteur, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Secteur  $secteur
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Secteur $secteur)
+    public function destroy($id)
     {
-        //
+        Secteur::findorfail($id)->delete();
+        return response()->json(null, 204);
     }
 }

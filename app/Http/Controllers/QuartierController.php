@@ -14,7 +14,7 @@ class QuartierController extends Controller
      */
     public function index()
     {
-        //
+        return Quartier::all();
     }
 
     /**
@@ -35,18 +35,19 @@ class QuartierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $quartier = Quartier::create($request->all());
+        return response()->json($quartier, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Quartier  $quartier
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Quartier $quartier)
+    public function show($id)
     {
-        //
+        return Quartier::findorfail($id);
     }
 
     /**
@@ -64,22 +65,25 @@ class QuartierController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Quartier  $quartier
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Quartier $quartier)
+    public function update(Request $request, $id)
     {
-        //
+        $quartier = Quartier::findorfail($id);
+        $quartier->update($request->all());
+        return response()->json($quartier, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Quartier  $quartier
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Quartier $quartier)
+    public function destroy($id)
     {
-        //
+        Quartier::findorfail($id)->delete();
+        return response()->json(null, 204);
     }
 }

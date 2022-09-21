@@ -14,7 +14,7 @@ class CommuneController extends Controller
      */
     public function index()
     {
-        //
+        return Commune::all();
     }
 
     /**
@@ -35,18 +35,19 @@ class CommuneController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $commune = Commune::create($request->all());
+        return response()->json($commune, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Commune  $commune
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Commune $commune)
+    public function show($id)
     {
-        //
+        return Commune::findorfail($id);
     }
 
     /**
@@ -64,22 +65,25 @@ class CommuneController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Commune  $commune
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Commune $commune)
+    public function update(Request $request, $id)
     {
-        //
+        $commune = Commune::findorfail($id);
+        $commune->update($request->all());
+        return response()->json($commune, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Commune  $commune
+     * @param  int $id 
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Commune $commune)
+    public function destroy($id)
     {
-        //
+        Commune::findorfail($id)->delete();
+        return response()->json(null, 204);
     }
 }

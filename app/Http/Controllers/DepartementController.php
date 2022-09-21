@@ -14,7 +14,7 @@ class DepartementController extends Controller
      */
     public function index()
     {
-        //
+        return Departement::all();
     }
 
     /**
@@ -35,24 +35,25 @@ class DepartementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $departement = Departement::create($request->all());
+        return response()->json($departement, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Departement  $departement
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Departement $departement)
+    public function show($id)
     {
-        //
+        return Departement::findorfail($id);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Departement  $departement
+    * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Departement $departement)
@@ -64,22 +65,25 @@ class DepartementController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Departement  $departement
+      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Departement $departement)
+    public function update(Request $request, $id)
     {
-        //
+        $departement = Departement::findorfail($id);
+        $departement->update($request->all());
+        return response()->json($departement, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Departement  $departement
+      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Departement $departement)
+    public function destroy($id)
     {
-        //
+        Departement::findorfail($id)->delete();
+        return response()->json(null, 204);
     }
 }

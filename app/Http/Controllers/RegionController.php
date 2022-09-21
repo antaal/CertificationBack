@@ -14,7 +14,7 @@ class RegionController extends Controller
      */
     public function index()
     {
-        //
+        return Region::all();
     }
 
     /**
@@ -35,18 +35,20 @@ class RegionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Region = Region::create($request->all());
+        return response()->json($Region, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Region  $region
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Region $region)
+    public function show($id)
     {
-        //
+        $Region = Region::findorfail($id);
+        return response()->json($Region);
     }
 
     /**
@@ -64,22 +66,25 @@ class RegionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Region  $region
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Region $region)
+    public function update(Request $request, $id)
     {
-        //
+        $Region = Region::findorfail($id);
+        $Region->update($request->all());
+        return response()->json($Region, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Region  $region
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Region $region)
+    public function destroy($id)
     {
-        //
+        Region::findorfail($id)->delete();
+        return response()->json(null, 204);
     }
 }

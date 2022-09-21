@@ -14,7 +14,7 @@ class ResponsableController extends Controller
      */
     public function index()
     {
-        //
+        return Responsable::all();
     }
 
     /**
@@ -41,12 +41,12 @@ class ResponsableController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Responsable  $responsable
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Responsable $responsable)
+    public function show($id)
     {
-        //
+        return Responsable::findorfail($id);
     }
 
     /**
