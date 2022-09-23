@@ -37,9 +37,9 @@ class ProjetController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        // $request['users_id'] = $request->user()->id;
+        //  $request['users_id'] = $request->user()->id;
         $responsable=Responsable::create($request->all());
-        $data['responsable_id']=$responsable->id;
+        $data['responsables_id']=$responsable->id;
          $projet= Projet::create($data);        
          return response()->json($projet, 201);
     }
