@@ -27,8 +27,8 @@ return new class extends Migration
             ;
             $table->unsignedBigInteger('quartiers_id');
             $table->foreign('quartiers_id')->references('id')->on('quartiers');
-            $table->unsignedBigInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users');
+            // $table->unsignedBigInteger('users_id');
+            // $table->foreign('users_id')->references('id')->on('users');
             
             $table->timestamps();
         });

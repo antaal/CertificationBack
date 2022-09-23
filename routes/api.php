@@ -11,6 +11,7 @@ use App\Http\Controllers\ResponsableController;
 use App\Http\Controllers\SecteurController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Laravel\Sanctum\Sanctum;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,15 +24,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/user', [AuthController::class, 'user']);
 });
-Route::post('/auth/register', [AuthController::class, 'register']);
-Route::post('/auth/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 Route::resource('offres', OffreController::class);
 Route::resource('projets', ProjetController::class);
 Route::resource('quartiers',QuartierController::class);
-Route::resource('regions', RegionController::class);
+Route::resource('regions', RegionController::class)->middleware('auth:sanctum');
 Route::resource('communes', CommuneController::class);
 Route::resource('departements', DepartementController::class);
 Route::resource('responsables',ResponsableController::class);
